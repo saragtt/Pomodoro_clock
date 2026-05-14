@@ -1,0 +1,73 @@
+body {
+  background-color: #ccd5ae;
+  font-family: "Libre Baskerville", serif;
+  font-optical-sizing: auto;
+  margin: 0;
+}
+
+button {
+  padding: 10px 15px;
+  border-radius: 15%;
+  background-color: darkgreen;
+  border: none;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid rgb(105, 10, 10);
+  justify-content: space-between;
+  padding: 10px 25px;
+  background-color: #386641;
+}
+
+.clock-body {
+  text-align: center;
+}
+
+.length {
+  display: flex;
+}
+
+.break-length-box,
+.session-length-box {
+  width: 50%;
+  color: darkgreen;
+  font-size: 25px;
+}
+
+.break-length-box button,
+.session-length-box button {
+  background-color: darkgreen;
+}
+
+.break-length-box span,
+.session-length-box span {
+  padding: 0 15px 0 15px;
+  font-size: 25px;
+  margin-top: 5px;
+}
+
+.timer {
+  border-radius: 50%;
+  border: 2px solid rgb(109, 2, 2);
+  width: 350px;
+  height: 350px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin: 40px auto;
+  background-color: rgb(225, 15, 15);
+}
+.timer button {
+  background-color: rgb(179, 19, 19);
+  border-color: rgb(179, 19, 19);
+}
+
+.timer p {
+  font-size: 25px;
+  margin-bottom: 5px;
+}
