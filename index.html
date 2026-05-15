@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Pacifico&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Pacifico&display=swap"
       rel="stylesheet"
     />
     <script defer src="./js.js"></script>
@@ -16,35 +16,52 @@
   <body>
     <nav class="navbar">
       <h1 class="logo">Pomodoro Clock</h1>
-
-      <div class="nav-buttons">
-        <button>Home</button>
-        <button>About</button>
-        <button>Sign in</button>
-      </div>
     </nav>
+
     <div class="clock-body">
-      <h1>Time to take a break!</h1>
+      <h1 id="main-title">Let's start!</h1>
       <div class="length">
         <div class="break-length-box">
           <h2>Break length</h2>
-          <button class="break-length-button" value="-">-</button>
-          <span>5</span>
-          <button class="break-length-button" value="+">+</button>
+          <button class="break-length-button" value="-" id="break-decrement">
+            -
+          </button>
+          <span id="break-length">5</span>
+          <button class="break-length-button" value="+" id="break-increment">
+            +
+          </button>
         </div>
         <div class="session-length-box">
           <h2>Session length</h2>
-          <button class="session-length-button" value="-">-</button>
-          <span>25</span>
-          <button class="session-length-button" value="+">+</button>
+          <button
+            class="session-length-button"
+            value="-"
+            id="session-decrement"
+          >
+            -
+          </button>
+          <span id="session-length">25</span>
+          <button
+            class="session-length-button"
+            value="+"
+            id="session-increment"
+          >
+            +
+          </button>
         </div>
       </div>
+
       <div class="timer">
-        <p class="start-session">Session</p>
-        <button class="start-session-button">Start</button>
-        <p class="end-session">25:00</p>
-        <button class="reset-session-button">Reset</button>
+        <p class="start-session" id="timer-label">Session</p>
+        <button class="start-session-button" value="start" id="start_stop">
+          Start
+        </button>
+        <p class="end-session" id="time-left">25:00</p>
+        <button class="reset-session-button" value="reset" id="reset">
+          Reset
+        </button>
       </div>
     </div>
+    <audio id="alarm" src="./bell.wav"></audio>
   </body>
 </html>

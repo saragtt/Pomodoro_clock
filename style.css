@@ -1,8 +1,9 @@
 body {
-  background-color: #ccd5ae;
   font-family: "Libre Baskerville", serif;
   font-optical-sizing: auto;
+  font-style: normal;
   margin: 0;
+  background: linear-gradient(135deg, #ccd5ae, #a3b18a);
 }
 
 button {
@@ -10,19 +11,28 @@ button {
   border-radius: 15%;
   background-color: darkgreen;
   border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
 }
 
 .navbar {
   display: flex;
   align-items: center;
   border-bottom: 3px solid rgb(105, 10, 10);
-  justify-content: space-between;
+  justify-content: center;
   padding: 10px 25px;
   background-color: #386641;
+  height: 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .clock-body {
   text-align: center;
+}
+
+.clock-body h1 {
+  margin-bottom: 0;
 }
 
 .length {
@@ -34,6 +44,7 @@ button {
   width: 50%;
   color: darkgreen;
   font-size: 25px;
+  gap: 25px;
 }
 
 .break-length-box button,
@@ -58,16 +69,23 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  margin: 40px auto;
-  background-color: rgb(225, 15, 15);
+  margin: auto;
+  background: linear-gradient(135deg, #d62828, #9d0208);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 .timer button {
   background-color: rgb(179, 19, 19);
   border-color: rgb(179, 19, 19);
+  padding: 12px 22px;
+  border-radius: 12px;
 }
 
 .timer p {
-  font-size: 25px;
+  font-size: 35px;
   margin-bottom: 5px;
+  font-weight: bold;
+}
+#time-left {
+  font-size: 45px;
+  font-weight: bold;
 }
