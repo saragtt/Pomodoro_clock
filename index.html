@@ -18,36 +18,45 @@
       <h1 class="logo">Pomodoro Clock</h1>
     </nav>
 
+    <h1 id="main-title">Let's start!</h1>
+
     <div class="clock-body">
-      <h1 id="main-title">Let's start!</h1>
       <div class="length">
         <div class="break-length-box">
-          <h2>Break length</h2>
-          <button class="break-length-button" value="-" id="break-decrement">
-            -
-          </button>
-          <span id="break-length">5</span>
-          <button class="break-length-button" value="+" id="break-increment">
-            +
-          </button>
+          <h2>Break</h2>
+          <h2>Length</h2>
+
+          <div class="controls">
+            <button class="break-length-button" value="-" id="break-decrement">
+              -
+            </button>
+            <span id="break-length">5</span>
+            <button class="break-length-button" value="+" id="break-increment">
+              +
+            </button>
+          </div>
         </div>
         <div class="session-length-box">
-          <h2>Session length</h2>
-          <button
-            class="session-length-button"
-            value="-"
-            id="session-decrement"
-          >
-            -
-          </button>
-          <span id="session-length">25</span>
-          <button
-            class="session-length-button"
-            value="+"
-            id="session-increment"
-          >
-            +
-          </button>
+          <h2>Session</h2>
+          <h2>Length</h2>
+
+          <div class="controls">
+            <button
+              class="session-length-button"
+              value="-"
+              id="session-decrement"
+            >
+              -
+            </button>
+            <span id="session-length">25</span>
+            <button
+              class="session-length-button"
+              value="+"
+              id="session-increment"
+            >
+              +
+            </button>
+          </div>
         </div>
       </div>
 

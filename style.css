@@ -3,6 +3,7 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
   margin: 0;
+  min-height: 100vh;
   background: linear-gradient(135deg, #ccd5ae, #a3b18a);
 }
 
@@ -22,29 +23,68 @@ button {
   border-bottom: 3px solid rgb(105, 10, 10);
   justify-content: center;
   padding: 10px 25px;
-  background-color: #386641;
+  background: #3a5a40;
   height: 40px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.clock-body {
-  text-align: center;
+.navbar h1 {
+  color: #15391d;
+  font-size: 40px;
+  margin: 0;
 }
 
-.clock-body h1 {
-  margin-bottom: 0;
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  color: darkgreen;
+}
+
+.clock-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  max-width: 1000px;
+  margin: 20px auto 0 auto;
 }
 
 .length {
   display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: center;
 }
 
 .break-length-box,
 .session-length-box {
-  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   color: darkgreen;
-  font-size: 25px;
-  gap: 25px;
+  font-size: 15px;
+  gap: 5px;
+  padding: 30px;
+  width: 150px;
+  background: #6b8f71;
+  border: 2px solid #386641;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.break-length-box h2,
+.session-length-box h2 {
+  margin: 0;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
 }
 
 .break-length-box button,
