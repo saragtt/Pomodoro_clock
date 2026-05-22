@@ -1,113 +1,157 @@
-//- button of length
 const breakDecrement = document.getElementById("break-decrement");
-
+const breakIncrement = document.getElementById("break-increment");
 const breakLength = document.getElementById("break-length");
 
-breakDecrement.addEventListener("click", function () {
-  let currentValue = Number(breakLength.textContent);
-
-  breakLength.textContent = currentValue - 1;
-  if (currentValue < 1) {
-    breakLength.textContent = currentValue;
-  }
-});
-
-//+ button of length
-const breakIncrement = document.getElementById("break-increment");
-
-breakIncrement.addEventListener("click", function () {
-  let currentValue = Number(breakLength.textContent);
-
-  breakLength.textContent = currentValue + 1;
-});
-
-// timer connection with the button
-const timeLeft = document.getElementById("time-left");
-
-//- button of session
 const sessionDecrement = document.getElementById("session-decrement");
-
+const sessionIncrement = document.getElementById("session-increment");
 const sessionLength = document.getElementById("session-length");
 
-sessionDecrement.addEventListener("click", function () {
-  let currentValue = Number(sessionLength.textContent);
-
-  sessionLength.textContent = currentValue - 1;
-
-  if (currentValue < 1) {
-    sessionLength.textContent = currentValue;
-  }
-
-  timeLeft.textContent = currentValue - 1 + ":00";
-});
-
-//+ button of session
-const sessionIncrement = document.getElementById("session-increment");
-
-sessionIncrement.addEventListener("click", function () {
-  let currentValue = Number(sessionLength.textContent);
-
-  sessionLength.textContent = currentValue + 1;
-
-  timeLeft.textContent = currentValue + 1 + ":00";
-});
-
-// start button of timer
+const timeLeft = document.getElementById("time-left");
+const timerLabel = document.getElementById("timer-label");
 const startButton = document.getElementById("start_stop");
-
-let currentTime = 25 * 60;
-
-let timer;
-
-let isSession = true;
-
+const resetButton = document.getElementById("reset");
 const mainTitle = document.getElementById("main-title");
-
 const alarm = document.getElementById("alarm");
 
+const quoteText = document.getElementById("quote-text");
+const quoteAuthor = document.getElementById("quote-author");
+const newQuoteButton = document.getElementById("new-quote");
+
+let currentTime = Number(sessionLength.textContent) * 60;
+let timer = null;
+let isSession = true;
+let isRunning = false;
+
+breakDecrement.addEventListener("click", function () {
+  changeLength(breakLength, -1);
+});
+
+breakIncrement.addEventListener("click", function () {
+  changeLength(breakLength, 1);
+});
+
+sessionDecrement.addEventListener("click", function () {
+  changeLength(sessionLength, -1);
+  updateSessionTime();
+});
+
+sessionIncrement.addEventListener("click", function () {
+  changeLength(sessionLength, 1);
+  updateSessionTime();
+});
+
 startButton.addEventListener("click", function () {
-  currentTime = Number(sessionLength.textContent) * 60;
+  if (isRunning) {
+    pauseTimer();
+  } else {
+    startTimer();
+  }
+});
+
+resetButton.addEventListener("click", resetTimer);
+newQuoteButton.addEventListener("click", getFocusQuote);
+
+function changeLength(element, amount) {
+  if (isRunning) {
+    return;
+  }
+
+  let currentValue = Number(element.textContent);
+  let newValue = currentValue + amount;
+
+  if (newValue < 1) {
+    newValue = 1;
+  }
+
+  if (newValue > 60) {
+    newValue = 60;
+  }
+
+  element.textContent = newValue;
+}
+
+function updateSessionTime() {
+  if (!isRunning && isSession) {
+    currentTime = Number(sessionLength.textContent) * 60;
+    displayTime();
+  }
+}
+
+function startTimer() {
+  isRunning = true;
+  startButton.textContent = "Pause";
+  getFocusQuote();
 
   timer = setInterval(function () {
     currentTime--;
+    displayTime();
 
     if (currentTime <= 0) {
-      alarm.play();
-
-      if (isSession === true) {
-        currentTime = Number(breakLength.textContent) * 60;
-
-        isSession = false;
-
-        mainTitle.textContent = "Time to take a break!";
-      } else {
-        currentTime = Number(sessionLength.textContent) * 60;
-
-        isSession = true;
-
-        mainTitle.textContent = "Let's start!";
-      }
+      changeMode();
     }
-
-    let minutes = Math.floor(currentTime / 60);
-
-    let seconds = currentTime % 60;
-
-    if (seconds < 10) {
-      seconds = "0" + seconds;
-    }
-
-    timeLeft.textContent = minutes + ":" + seconds;
   }, 1000);
-});
+}
 
-//reset button
-const resetButton = document.getElementById("reset");
-
-resetButton.addEventListener("click", function () {
+function pauseTimer() {
+  isRunning = false;
+  startButton.textContent = "Start";
   clearInterval(timer);
+}
 
-  currentTime = 25 * 60;
+function resetTimer() {
+  pauseTimer();
+  isSession = true;
+  currentTime = Number(sessionLength.textContent) * 60;
+  timerLabel.textContent = "Session";
+  mainTitle.textContent = "Ready to focus?";
+  displayTime();
+}
 
-  timeLeft.textContent = "25:00";
-});
+function changeMode() {
+  alarm.play();
+  isSession = !isSession;
+
+  if (isSession) {
+    currentTime = Number(sessionLength.textContent) * 60;
+    timerLabel.textContent = "Session";
+    mainTitle.textContent = "Ready for the next focus session?";
+  } else {
+    currentTime = Number(breakLength.textContent) * 60;
+    timerLabel.textContent = "Break";
+    mainTitle.textContent = "Time to take a break!";
+  }
+
+  displayTime();
+}
+
+function displayTime() {
+  let minutes = Math.floor(currentTime / 60);
+  let seconds = currentTime % 60;
+
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+
+  timeLeft.textContent = minutes + ":" + seconds;
+}
+
+function getFocusQuote() {
+  quoteText.textContent = "Loading quote...";
+  quoteAuthor.textContent = "";
+
+  fetch("https://dummyjson.com/quotes/random")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      quoteText.textContent = '"' + data.quote + '"';
+      quoteAuthor.textContent = "- " + data.author;
+    })
+    .catch(function () {
+      quoteText.textContent =
+        '"Focus on being productive instead of busy."';
+      quoteAuthor.textContent = "- Tim Ferriss";
+    });
+}
+
+displayTime();
